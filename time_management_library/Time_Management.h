@@ -1,10 +1,20 @@
 #ifndef __TIME_MANAGEMENT_H
 #define __TIME_MANAGEMENT_H
 
+/*************************************************************************
+*@Author:AHMET SAMIL BILGIN
+*@Name	:Task Management Library
+*@Explanation:
+-The purpose of this library is to make the code more modular and make it easier
+to add and remove later.It allows us to do the tasks that occur in a certain period more regularly.
 
-#include "standart_library.h"
 
-#define MAX_TIME_TASK (32)
+**************************************************************************/
+
+
+
+#include "standart_library.h" // stdint.h,stdbool.h,stdlib.h Librarys.
+#define MAX_TIME_TASK (32)	  // you can change max time task here.
 
 
 typedef enum

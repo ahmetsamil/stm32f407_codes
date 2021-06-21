@@ -11,6 +11,9 @@ void Task_Table_Init(void);
 Time_Interface_t Time_Interface;
 Time_Task_Table_t Time_Task_Table[MAX_TIME_TASK]; 
 
+/**
+*@brief :Init Task Interface Structure,You call this function before start
+**/
 void Time_Management_Interface_Init()
 {
 	Time_Interface.Add_Task=Add_Task;
@@ -21,7 +24,9 @@ void Time_Management_Interface_Init()
 	Task_Table_Init();
 	
 }	
-
+/**
+*@brief :Deinit Task table.
+**/
 void Task_Table_Init(void)
 {
 	uint8_t cnt;
@@ -34,6 +39,14 @@ void Task_Table_Init(void)
 	}	
 }	
 
+/**
+  * @brief  Adds the time tasks you have written
+  * @param  f_manager		:It is task running 
+  *         time_periode    :Allows it to enter the desired period.it depends on your local time. 
+			f_init   		:Before run task, init written task.if not enter NULL.
+			priority		:Determines its order in the task table.  
+  * @retval return pointer.You may access this pointer.
+  */
 void* Add_Task (void (*f_manager)(void),uint64_t time_periode,void (*f_init)(void),uint8_t priority)
 {
 	Time_Task_Table[priority].Time_Periode=time_periode;
@@ -45,16 +58,28 @@ void* Add_Task (void (*f_manager)(void),uint64_t time_periode,void (*f_init)(voi
 	
 
 }
-
+/** 
+  * @brief  Stop running task
+  * @retval None
+  */
 void  Arrest_Task (Time_Task_Table_t* Task_Address)
 {
 	Task_Address->time_task_status=deactive;
-}	
+}
+	
+/** 
+  * @brief  Continue stopped task
+  * @retval None
+  */
 void  Continue_Task(Time_Task_Table_t*  Task_Address)
 {
 	Task_Address->time_task_status=active;
 }	
 
+/** 
+  * @brief  Stop all task
+  * @retval None
+  */
 void Arrest_All_Task(void)
 {
 	uint8_t cnt;
@@ -68,6 +93,10 @@ void Arrest_All_Task(void)
 	}	
 }	
 
+/** 
+  * @brief  navigates through tasks.First it looks task status.Then it checks periode.  
+  * @retval None
+  */
 void Run_Time_Management(void)
 {
 	uint8_t cnt;
